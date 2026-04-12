@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { format, startOfToday, addDays, eachDayOfInterval, isSameDay } from "date-fns";
 import { Trash2, CheckCircle, Calendar, User, Phone, MapPin, Clock, ShieldAlert, Settings } from "lucide-react";
-import { db } from "../firebase";
+import { db } from "../firebase-config";
 import { collection, onSnapshot, query, orderBy, doc, updateDoc, deleteDoc, addDoc, where, getDocs, deleteField } from "firebase/firestore";
-import { cn } from "../lib/styling";
+import { cn } from "./theme-utils";
 
 enum OperationType {
   CREATE = 'create',

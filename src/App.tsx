@@ -10,7 +10,7 @@ import ContactSection from "./components/ContactSection";
 import AdminDashboard from "./components/AdminDashboard";
 import ScrollToTop from "./components/ScrollToTop";
 import { AppErrorBoundary } from "./components/AppErrorBoundary";
-import { auth } from "./firebase";
+import { auth } from "./firebase-config";
 import { onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { LogIn, LogOut } from "lucide-react";
 

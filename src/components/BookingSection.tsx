@@ -8,8 +8,8 @@ import {
   isSameDay, 
 } from "date-fns";
 import { Calendar as CalendarIcon, Clock, MapPin, User, Mail, Phone, ChevronLeft, CheckCircle2, Info } from "lucide-react";
-import { cn } from "../lib/styling";
-import { db } from "../firebase";
+import { cn } from "./theme-utils";
+import { db } from "../firebase-config";
 import { collection, addDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore";
 
 enum OperationType {
