@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
+import MainNavbar from "./components/MainNavbar";
+import MainHero from "./components/MainHero";
 import ServiceHighlights from "./components/ServiceHighlights";
-import Services from "./components/Services";
-import Booking from "./components/Booking";
-import Policies from "./components/Policies";
-import About from "./components/About";
-import Contact from "./components/Contact";
+import ServiceList from "./components/ServiceList";
+import BookingSection from "./components/BookingSection";
+import PolicySection from "./components/PolicySection";
+import AboutSection from "./components/AboutSection";
+import ContactSection from "./components/ContactSection";
 import AdminView from "./components/AdminView";
 import BackToTop from "./components/BackToTop";
 import { ErrorBoundary } from "./components/ErrorBoundary";
@@ -65,7 +65,7 @@ export default function App() {
 
   const content = isAdmin ? (
     <div className="bg-black min-h-screen text-white selection:bg-red-600 selection:text-white">
-      <Navbar />
+      <MainNavbar />
       {user ? (
         <AdminView />
       ) : (
@@ -101,15 +101,15 @@ export default function App() {
     </div>
   ) : (
     <div className="bg-black min-h-screen text-white selection:bg-red-600 selection:text-white">
-      <Navbar />
+      <MainNavbar />
       <main>
-        <Hero />
+        <MainHero />
         <ServiceHighlights />
-        <Services />
-        <Booking />
-        <Policies />
-        <About />
-        <Contact />
+        <ServiceList />
+        <BookingSection />
+        <PolicySection />
+        <AboutSection />
+        <ContactSection />
       </main>
       
       <BackToTop />

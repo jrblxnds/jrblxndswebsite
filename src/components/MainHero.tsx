@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 
-export default function Hero() {
+export default function MainHero() {
   return (
     <section className="relative h-screen flex items-center justify-center bg-black overflow-hidden">
       {/* Subtle background element */}

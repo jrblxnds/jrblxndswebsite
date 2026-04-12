@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { Phone, Mail, Instagram, Scissors } from "lucide-react";
 
-export default function Contact() {
+export default function ContactSection() {
   return (
     <footer id="contact" className="py-20 bg-black border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6">

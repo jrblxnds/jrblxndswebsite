@@ -48,7 +48,7 @@ const TIME_SLOTS = [
 
 const FIXED_ADDRESS = "4854 Bathurst Street, Room 410";
 
-export default function Booking() {
+export default function BookingSection() {
   const [selectedDate, setSelectedDate] = useState<Date>(startOfToday());
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [step, setStep] = useState(1);
