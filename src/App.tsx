@@ -7,8 +7,8 @@ import BookingSection from "./components/BookingSection";
 import PolicySection from "./components/PolicySection";
 import AboutSection from "./components/AboutSection";
 import ContactSection from "./components/ContactSection";
-import AdminView from "./components/AdminView";
-import BackToTop from "./components/BackToTop";
+import AdminDashboard from "./components/AdminDashboard";
+import ScrollToTop from "./components/ScrollToTop";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { auth } from "./firebase";
 import { onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
@@ -67,7 +67,7 @@ export default function App() {
     <div className="bg-black min-h-screen text-white selection:bg-red-600 selection:text-white">
       <MainNavbar />
       {user ? (
-        <AdminView />
+        <AdminDashboard />
       ) : (
         <div className="min-h-screen flex items-center justify-center p-6">
           <div className="text-center max-w-md bg-zinc-950 border border-white/10 p-12">
@@ -112,7 +112,7 @@ export default function App() {
         <ContactSection />
       </main>
       
-      <BackToTop />
+      <ScrollToTop />
 
       {/* Hidden Admin Access */}
       <div className="fixed bottom-4 left-4 opacity-0 hover:opacity-100 transition-opacity">

@@ -62,7 +62,6 @@ export default function BookingSection() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [bookedSlots, setBookedSlots] = useState<string[]>([]);
   const [blockedSlots, setBlockedSlots] = useState<string[]>([]);
 
   const days = eachDayOfInterval({
@@ -70,22 +69,13 @@ export default function BookingSection() {
     end: addDays(startOfToday(), 14)
   });
 
-  // Fetch booked and blocked slots when date changes
+  // Fetch blocked slots when date changes
   useEffect(() => {
     const fetchAvailability = async () => {
       const dateStr = format(selectedDate, "yyyy-MM-dd");
       
       try {
-        // Fetch existing bookings for this date
-        const bookingsQuery = query(
-          collection(db, "bookings"),
-          where("date", "==", selectedDate.toISOString())
-        );
-        const bookingsSnap = await getDocs(bookingsQuery);
-        const booked = bookingsSnap.docs.map(doc => doc.data().time);
-        setBookedSlots(booked);
-
-        // Fetch blocked slots for this date
+        // Fetch blocked slots for this date (includes both manual blocks and booked slots)
         const blockedQuery = query(
           collection(db, "blocked_slots"),
           where("date", "==", dateStr)
@@ -111,13 +101,21 @@ export default function BookingSection() {
     
     try {
       const path = 'bookings';
-      await addDoc(collection(db, path), {
+      const bookingRef = await addDoc(collection(db, path), {
         ...formData,
         address: FIXED_ADDRESS, // Ensure fixed address
         date: selectedDate.toISOString(),
         time: selectedTime,
         status: 'pending',
         createdAt: serverTimestamp()
+      });
+
+      // Also create a blocked slot entry to prevent double booking
+      await addDoc(collection(db, "blocked_slots"), {
+        date: format(selectedDate, "yyyy-MM-dd"),
+        time: selectedTime,
+        bookingId: bookingRef.id,
+        type: 'booking'
       });
 
       // Send notification email
@@ -231,9 +229,7 @@ export default function BookingSection() {
                     </h3>
                     <div className="grid grid-cols-3 md:grid-cols-5 gap-3">
                       {TIME_SLOTS.map((time) => {
-                        const isBooked = bookedSlots.includes(time);
-                        const isBlocked = blockedSlots.includes(time);
-                        const isUnavailable = isBooked || isBlocked;
+                        const isUnavailable = blockedSlots.includes(time);
 
                         return (
                           <button

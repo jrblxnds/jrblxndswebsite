@@ -20,7 +20,9 @@ service cloud.firestore {
 
     match /blocked_slots/{slotId} {
       allow read: if true;
-      allow write: if isAdmin();
+      allow create: if (request.resource.data.keys().hasAll(['date', 'time', 'bookingId', 'type']) &&
+                        request.resource.data.type == 'booking') || isAdmin();
+      allow update, delete: if isAdmin();
     }
 
     match /users/{userId} {

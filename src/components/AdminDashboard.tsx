@@ -29,7 +29,7 @@ function handleFirestoreError(error: unknown, operationType: OperationType, path
   throw new Error(JSON.stringify(errInfo));
 }
 
-export default function AdminView() {
+export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<"bookings" | "availability">("bookings");
   const [bookings, setBookings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -87,7 +87,18 @@ export default function AdminView() {
   const handleCancel = async (id: string) => {
     if (!confirm("Are you sure you want to delete this booking?")) return;
     try {
+      // Delete the booking
       await deleteDoc(doc(db, "bookings", id));
+      
+      // Find and delete the corresponding blocked slot
+      const blockedQuery = query(
+        collection(db, "blocked_slots"),
+        where("bookingId", "==", id)
+      );
+      const blockedSnap = await getDocs(blockedQuery);
+      for (const blockedDoc of blockedSnap.docs) {
+        await deleteDoc(doc(db, "blocked_slots", blockedDoc.id));
+      }
     } catch (error) {
       handleFirestoreError(error, OperationType.DELETE, `bookings/${id}`);
     }
@@ -104,7 +115,8 @@ export default function AdminView() {
       } else {
         await addDoc(collection(db, "blocked_slots"), {
           date: dateStr,
-          time: time
+          time: time,
+          type: 'manual'
         });
       }
     } catch (error) {
@@ -290,8 +302,9 @@ export default function AdminView() {
                   
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {TIME_SLOTS.map((time) => {
-                      const isBlocked = blockedSlots.some(s => s.time === time);
-                      const isBooked = bookings.some(b => isSameDay(b.date, selectedDate) && b.time === time);
+                      const slotData = blockedSlots.find(s => s.time === time);
+                      const isBlocked = slotData?.type === 'manual';
+                      const isBooked = slotData?.type === 'booking';
 
                       return (
                         <button

@@ -24,7 +24,9 @@
       "type": "object",
       "properties": {
         "date": { "type": "string", "format": "date", "description": "The date of the blocked slot (YYYY-MM-DD)." },
-        "time": { "type": "string", "description": "The time of the blocked slot." }
+        "time": { "type": "string", "description": "The time of the blocked slot." },
+        "bookingId": { "type": "string", "description": "Optional ID of the booking that created this block." },
+        "type": { "type": "string", "enum": ["manual", "booking"], "description": "The reason for the block." }
       },
       "required": ["date", "time"]
     }
