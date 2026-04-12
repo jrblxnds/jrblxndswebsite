@@ -9,7 +9,7 @@ import AboutSection from "./components/AboutSection";
 import ContactSection from "./components/ContactSection";
 import AdminDashboard from "./components/AdminDashboard";
 import ScrollToTop from "./components/ScrollToTop";
-import { ErrorBoundary } from "./components/ErrorBoundary";
+import { AppErrorBoundary } from "./components/AppErrorBoundary";
 import { auth } from "./firebase";
 import { onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { LogIn, LogOut } from "lucide-react";
@@ -127,8 +127,8 @@ export default function App() {
   );
 
   return (
-    <ErrorBoundary>
+    <AppErrorBoundary>
       {content}
-    </ErrorBoundary>
+    </AppErrorBoundary>
   );
 }
