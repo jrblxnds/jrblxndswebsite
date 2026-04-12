@@ -1,3 +1,7 @@
+/**
+ * JRBLXNDS | Premium Barber Website
+ * Build Version: 1.0.1 - Netlify Build Fix
+ */
 import { useState, useEffect } from "react";
 import MainNavbar from "./components/MainNavbar";
 import MainHero from "./components/MainHero";
