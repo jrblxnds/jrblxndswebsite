@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import ServiceHighlight from "./components/ServiceHighlight";
+import ServiceHighlights from "./components/ServiceHighlights";
 import Services from "./components/Services";
 import Booking from "./components/Booking";
 import Policies from "./components/Policies";
@@ -104,7 +104,7 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
-        <ServiceHighlight />
+        <ServiceHighlights />
         <Services />
         <Booking />
         <Policies />
