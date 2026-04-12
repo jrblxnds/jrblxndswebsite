@@ -1,0 +1,42 @@
+{
+  "entities": {
+    "Booking": {
+      "title": "Booking",
+      "description": "A haircut appointment booking.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Full name of the client." },
+        "email": { "type": "string", "format": "email", "description": "Email address of the client." },
+        "phone": { "type": "string", "description": "Phone number of the client." },
+        "address": { "type": "string", "description": "Service address." },
+        "service": { "type": "string", "description": "Type of haircut." },
+        "date": { "type": "string", "format": "date-time", "description": "Date of the appointment." },
+        "time": { "type": "string", "description": "Time slot of the appointment." },
+        "notes": { "type": "string", "description": "Additional notes." },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "cancelled"], "description": "Status of the booking." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the booking was created." }
+      },
+      "required": ["name", "email", "phone", "address", "service", "date", "time", "status", "createdAt"]
+    },
+    "BlockedSlot": {
+      "title": "Blocked Slot",
+      "description": "A date and time slot that is unavailable for booking.",
+      "type": "object",
+      "properties": {
+        "date": { "type": "string", "format": "date", "description": "The date of the blocked slot (YYYY-MM-DD)." },
+        "time": { "type": "string", "description": "The time of the blocked slot." }
+      },
+      "required": ["date", "time"]
+    }
+  },
+  "firestore": {
+    "/bookings/{bookingId}": {
+      "schema": "Booking",
+      "description": "Collection of all haircut bookings."
+    },
+    "/blocked_slots/{slotId}": {
+      "schema": "BlockedSlot",
+      "description": "Slots blocked by the admin."
+    }
+  }
+}
