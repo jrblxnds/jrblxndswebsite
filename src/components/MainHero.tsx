@@ -13,7 +13,7 @@ export default function MainHero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-7xl md:text-9xl font-black text-white tracking-tighter mb-4"
         >
-          JRBLXNDS
+          JRBLXNDZ
         </motion.h1>
         
         <motion.p

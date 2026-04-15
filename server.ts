@@ -47,7 +47,7 @@ async function startServer() {
 
     try {
       const { data, error } = await resendClient.emails.send({
-        from: "JRBLXNDS Bookings <onboarding@resend.dev>",
+        from: "JRBLXNDZ Bookings <onboarding@resend.dev>",
         to: [notificationEmail],
         subject: `New Booking: ${service} - ${name}`,
         html: `

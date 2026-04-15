@@ -16,7 +16,7 @@ enum OperationType {
 }
 
 const TIME_SLOTS = [
-  "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM"
+  "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM"
 ];
 
 function handleFirestoreError(error: unknown, operationType: OperationType, path: string | null) {
@@ -87,20 +87,28 @@ export default function AdminDashboard() {
   const handleCancel = async (id: string) => {
     if (!confirm("Are you sure you want to delete this booking?")) return;
     try {
-      // Delete the booking
+      // 1. Delete the booking document
       await deleteDoc(doc(db, "bookings", id));
-      
-      // Find and delete the corresponding blocked slot
-      const blockedQuery = query(
-        collection(db, "blocked_slots"),
-        where("bookingId", "==", id)
-      );
-      const blockedSnap = await getDocs(blockedQuery);
-      for (const blockedDoc of blockedSnap.docs) {
-        await deleteDoc(doc(db, "blocked_slots", blockedDoc.id));
+
+      // 2. Optimistically remove from local state right away
+      setBookings(prev => prev.filter(b => b.id !== id));
+
+      // 3. Best-effort cleanup of any associated blocked_slots
+      try {
+        const blockedQuery = query(
+          collection(db, "blocked_slots"),
+          where("bookingId", "==", id)
+        );
+        const blockedSnap = await getDocs(blockedQuery);
+        for (const blockedDoc of blockedSnap.docs) {
+          await deleteDoc(doc(db, "blocked_slots", blockedDoc.id));
+        }
+      } catch (cleanupError) {
+        console.error("Failed to clean up blocked slots:", cleanupError);
       }
     } catch (error) {
-      handleFirestoreError(error, OperationType.DELETE, `bookings/${id}`);
+      console.error("Failed to delete booking:", error);
+      alert("Failed to delete booking. Please check your Firestore permissions and try again.");
     }
   };
 
@@ -120,7 +128,8 @@ export default function AdminDashboard() {
         });
       }
     } catch (error) {
-      handleFirestoreError(error, OperationType.WRITE, "blocked_slots");
+      console.error("Failed to update slot:", error);
+      alert("Failed to update slot. Please check your Firestore permissions and try again.");
     } finally {
       setBlockingLoading(false);
     }

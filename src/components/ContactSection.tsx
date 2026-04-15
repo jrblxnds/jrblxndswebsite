@@ -9,7 +9,7 @@ export default function ContactSection() {
           <div>
             <div className="flex items-center gap-2 mb-6">
               <Scissors className="w-8 h-8 text-red-600" />
-              <span className="text-2xl font-black tracking-tighter text-white">JRBLXNDS</span>
+              <span className="text-2xl font-black tracking-tighter text-white">JRBLXNDZ</span>
             </div>
             <p className="text-gray-400 leading-relaxed">
               Elevating the standard of grooming through precision and dedication.
@@ -23,9 +23,9 @@ export default function ContactSection() {
                 <Phone className="w-5 h-5" />
                 <span>647 783 4264</span>
               </a>
-              <a href="mailto:jrblxnds@gmail.com" className="flex items-center gap-3 text-gray-400 hover:text-red-500 transition-colors">
+              <a href="mailto:jrblxndz@gmail.com" className="flex items-center gap-3 text-gray-400 hover:text-red-500 transition-colors">
                 <Mail className="w-5 h-5" />
-                <span>jrblxnds@gmail.com</span>
+                <span>jrblxndz@gmail.com</span>
               </a>
             </div>
           </div>
@@ -46,7 +46,7 @@ export default function ContactSection() {
         
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} JRBLXNDS. All rights reserved.
+            © {new Date().getFullYear()} JRBLXNDZ. All rights reserved.
           </p>
           <div className="flex gap-8 text-gray-500 text-sm">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>

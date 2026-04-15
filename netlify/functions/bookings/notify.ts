@@ -28,7 +28,7 @@ export const handler: Handler = async (event) => {
     }
 
     const { data, error } = await resend.emails.send({
-      from: "JRBLXNDS Bookings <onboarding@resend.dev>",
+      from: "JRBLXNDZ Bookings <onboarding@resend.dev>",
       to: [notificationEmail],
       subject: `New Booking: ${service} - ${name}`,
       html: `

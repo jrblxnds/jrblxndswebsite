@@ -1,5 +1,5 @@
 /**
- * JRBLXNDS | Premium Barber Website
+ * JRBLXNDZ | Premium Barber Website
  * Build Version: 1.0.1 - Netlify Build Fix
  */
 import { useState, useEffect } from "react";
@@ -24,7 +24,7 @@ export default function App() {
   const [isAuthReady, setIsAuthReady] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
 
-  const ADMIN_EMAIL = "jrblxnds@gmail.com";
+  const ADMIN_EMAIL = "jrblxndz@gmail.com";
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {

@@ -1,8 +1,8 @@
 import { motion } from "motion/react";
 
 const services = [
-  { name: "Tapers", price: "$25" },
-  { name: "Fades", price: "$25" },
+  { name: "Tapers", price: "$30" },
+  { name: "Fades", price: "$30" },
   { name: "Designs", price: "+$5" },
   { name: "Beards", price: "+$15" },
   { name: "Goatee", price: "+$10" },

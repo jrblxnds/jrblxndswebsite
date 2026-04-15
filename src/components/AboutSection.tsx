@@ -20,7 +20,7 @@ export default function AboutSection() {
             </h2>
             <div className="space-y-6 text-xl text-gray-400 leading-relaxed">
               <p>
-                JRBLXNDS isn't just a haircut; it's a statement of excellence. 
+                JRBLXNDZ isn't just a haircut; it's a statement of excellence. 
                 With a relentless focus on precision, detail, and consistency, 
                 I provide a premium grooming experience for those who demand the best.
               </p>
